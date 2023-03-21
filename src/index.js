@@ -1,13 +1,15 @@
 import weatherAPI from "./api";
+import { extractCoreData, formatCityName } from "./utils.js"
 
 let api = new weatherAPI();
 
-const url = api.getBasicCallURL('Port+Of+Spain');
+const url = api.getBasicCallURL(formatCityName(" Port-Of-Spain , Trinidad "));
 
 api.getBasicData(url).then((coordinates)=>{
     const forecastUrl = api.getAdvancedCallURL(coordinates.lat, coordinates.lon, 'metric');
     api.getFullForecastData(forecastUrl).then((data)=>{
-        console.log(data);
+        console.log(data.list[0]);
+        extractCoreData(coordinates.name, data);
     })
 })
 

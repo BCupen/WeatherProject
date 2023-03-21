@@ -15,7 +15,7 @@
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass weatherAPI {\n    _apiKey = '0acdadc54f11831d45863556db35e0d6';\n\n    getBasicCallURL (cityName){\n        return `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${this._apiKey}`;\n    }\n\n    async getBasicData (url) {\n        const response = await fetch(url);\n        console.log(response);\n    }\n\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (weatherAPI);\n\n//# sourceURL=webpack://weatherproject/./src/api.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass weatherAPI {\n    _apiKey = '0acdadc54f11831d45863556db35e0d6';\n   \n\n    getBasicCallURL (cityName){\n        return `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${this._apiKey}`;\n    }\n\n    getAdvancedCallURL (lat, lon, units) {\n        return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${this._apiKey}`;\n    }\n\n    async getBasicData (url) {\n        const response = await fetch(url);\n        const data = await response.json();\n        const { coord } = data;\n        coord.name = data.name;\n        coord.country = data.sys.country;\n        console.log(coord);\n        return coord;\n    }\n\n    async getFullForecastData(url){\n        const response = await fetch(url);\n        const data = await response.json();\n        return data;\n    }\n\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (weatherAPI);\n\n//# sourceURL=webpack://weatherproject/./src/api.js?");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api */ \"./src/api.js\");\n\n\nlet api = new _api__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n\nconst url = api.getBasicCallURL('Port-Of-Spain');\n\napi.getBasicData(url);\n\n//# sourceURL=webpack://weatherproject/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api */ \"./src/api.js\");\n\n\nlet api = new _api__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n\nconst url = api.getBasicCallURL('Port+Of+Spain');\n\napi.getBasicData(url).then((coordinates)=>{\n    const forecastUrl = api.getAdvancedCallURL(coordinates.lat, coordinates.lon, 'metric');\n    api.getFullForecastData(forecastUrl).then((data)=>{\n        console.log(data);\n    })\n})\n\n\n\n//# sourceURL=webpack://weatherproject/./src/index.js?");
 
 /***/ })
 
