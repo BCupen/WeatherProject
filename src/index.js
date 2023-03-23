@@ -1,5 +1,6 @@
 import weatherAPI from "./api";
-import { extractCoreData, formatCityName } from "./utils.js"
+import { extractCoreData, formatCityName } from "./utils.js";
+import "./style.css";
 
 let api = new weatherAPI();
 
