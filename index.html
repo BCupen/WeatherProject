@@ -6,7 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
 <script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
-<body>
-    This is my weather app.
+<body class="day">
+    <form>
+        <input type="search" placeholder="Search for City...">
+        <button type="submit"></button>
+    </form>
+
+    <div class="container">
+        <div class="current-forecast">
+            <span class="date">Tuesday 28, February</span>
+            <h2 class="city">Port-Of-Spain</h2>
+            <span class="current-temp">26°C</span>
+            <span class="feels-like">Feels like 28°C</span>
+            <span class="description">Scattered Clouds</span>
+        </div>
+        <div class="current-forecast-img">
+            <img src=48a1bbe463295af4988b.png alt="current-forecast">
+        </div>
+        <div class="other-details">
+            <span class="lowest-temp">
+                <img src=21e669de160a8c51efa4.svg alt="current-forecast">
+                <p>22°</p>
+            </span>
+            <span class="highest-temp">
+                <img src=914b67325937460e5833.svg alt="current-forecast">
+                <p>36°</p>
+            </span>
+            <span class="humidity">
+                <img src=2ed6d4b19f08814cf822.svg alt="current-forecast">
+                <p>75%</p>
+            </span>
+            <span class="wind-speed">
+                <img src=60d87a3b796259d049ec.svg alt="current-forecast">
+                <p>13.2 km/h</p>
+            </span>
+        </div>
+
+    </div>
 </body>
 </html>
