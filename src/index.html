@@ -7,10 +7,13 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body class="day">
-    <form>
-        <input type="search" placeholder="Search for City...">
-        <button type="submit"></button>
-    </form>
+    <div class="search-container">
+        <form>
+            <input type="search" placeholder="Search for City...">
+            <button type="submit"></button>
+        </form>
+    </div>
+    
 
     <div class="container">
         <div class="current-forecast">
@@ -43,23 +46,23 @@
         </div>
         <div class="future-forecasts">
             <span>
-                <p>Wednesday 1, March</p>
-                <p>29°</p>
+                <p class="future-date">Wednesday 1, March</p>
+                <p class="future-temp">29°</p>
                 <img src=<%=require("./assets/50d.png")%> alt="current-forecast">
             </span>
             <span>
-                <p>Thursday 2, March</p>
-                <p>29°</p>
+                <p class="future-date">Thursday 2, March</p>
+                <p class="future-temp">29°</p>
                 <img src=<%=require("./assets/01d.png")%> alt="current-forecast">
             </span>
             <span>
-                <p>Friday 3, March</p>
-                <p>30°</p>
+                <p class="future-date">Friday 3, March</p>
+                <p class="future-temp">30°</p>
                 <img src=<%=require("./assets/04d.png")%> alt="current-forecast">
             </span>
             <span>
-                <p>Saturday 4, March</p>
-                <p>32°</p>
+                <p class="future-date">Saturday 4, March</p>
+                <p class="future-temp">32°</p>
                 <img src=<%=require("./assets/02d.png")%> alt="current-forecast">
             </span>
         </div>

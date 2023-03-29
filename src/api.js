@@ -16,7 +16,7 @@ class weatherAPI {
         const { coord } = data;
         coord.name = data.name;
         coord.country = data.sys.country;
-        console.log(coord);
+        // console.log(coord);
         return coord;
     }
 

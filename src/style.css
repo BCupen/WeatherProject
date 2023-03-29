@@ -75,13 +75,12 @@ input[type="search"]:focus {
 .container {
     width: 60vw;
     height: 60vh;
-    background: #162C39;
-    opacity: 0.6;
+    background: rgba(22, 44, 57, 0.6);
     border-radius: 20px;
     display: grid;
     padding: 1.8rem 2.4rem;
     color: #FFFFFF;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 50%));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 50%));
     grid-template-rows: auto 50%;
 }
 
@@ -122,6 +121,6 @@ h2.city {
 }
 
 .future-forecasts > span > img {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4rem;
+    /* height: 3.5rem; */
 }

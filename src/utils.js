@@ -15,7 +15,8 @@ function extractCoreData(cityName, fullData){
         icon: weather[0].icon
     };
     coreData.futureForecasts = getFutureForecasts(fullData.list);
-    console.log(coreData); 
+    // console.log(coreData);
+    return coreData; 
 }
 
 function convertToKmh(speed){
@@ -48,4 +49,24 @@ function formatCityName(cityName){
       .replace(/\s+/g, '+'); // replace any remaining white space with +, so it works in api call
 }
 
-export { extractCoreData, formatCityName };
+function dateFormatter(timeStamp){
+    const date = new Date(timeStamp * 1000);
+    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let dateString = `${weekDays[date.getDay()]} ${date.getDate()}, ${months[date.getMonth()]}`;
+    return dateString;
+}
+
+function capitalizeWords(str) {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+function roundUp(number){
+    return Math.ceil(number * 10) /10;
+}
+
+export { extractCoreData, formatCityName, dateFormatter, capitalizeWords, roundUp};
