@@ -1,6 +1,19 @@
-import { dateFormatter, capitalizeWords, roundUp } from "./utils";
+import { dateFormatter, capitalizeWords, roundUp, isDay } from "./utils";
+
+
 
 const DOM = (()=>{
+    const importAll = require =>
+    require.keys().reduce((acc, next) => {
+        acc[next.replace("./", "")] = require(next);
+        return acc;
+    }, {});
+
+    const images = importAll(
+    require.context("./assets", false, /\.(png|jpe?g|svg)$/)
+    );
+
+    const body = document.querySelector('body');
 
     const cityName = document.querySelector('h2.city');
     const date = document.querySelector('span.date');
@@ -13,6 +26,7 @@ const DOM = (()=>{
     const humidity = document.querySelector('span.humidity > p');
     const windSpeed = document.querySelector('span.wind-speed > p');
     const futureForecastsSpans = document.querySelectorAll('div.future-forecasts > span');
+    const currentImg = document.querySelector('.current-forecast-img > img');
 
     function displayInfo(coreData){
         const { todayForecast, futureForecasts } = coreData;
@@ -30,12 +44,28 @@ const DOM = (()=>{
         for(let [i, forecast] of futureForecastsSpans.entries()){
             displayFutureForecast(forecast, futureForecasts[i]);
         }
+
+        currentImg.src = images[`${todayForecast.icon}.png`];
+        changeBodyBackground(todayForecast.icon);
     }
 
     function displayFutureForecast(span, info){
         const date = span.querySelector('p.future-date');
+        const temp = span.querySelector('p.future-temp');
+        const img = span.querySelector('img');
         date.textContent = dateFormatter(info.timeStamp);
+        temp.textContent = `${roundUp(info.temp)}°`;
+        img.src = images[`${info.icon}.png`];
+    }
 
+    function changeBodyBackground(icon){
+        if(isDay(icon)){
+            body.classList.remove('night');
+            body.classList.add('day');
+        }else{
+            body.classList.remove('day');
+            body.classList.add('night');
+        }
     }
 
 

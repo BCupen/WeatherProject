@@ -69,4 +69,8 @@ function roundUp(number){
     return Math.ceil(number * 10) /10;
 }
 
-export { extractCoreData, formatCityName, dateFormatter, capitalizeWords, roundUp};
+function isDay(icon){
+    return icon.includes('d');
+}
+
+export { extractCoreData, formatCityName, dateFormatter, capitalizeWords, roundUp, isDay};

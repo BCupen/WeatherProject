@@ -7,26 +7,21 @@ let api = new weatherAPI();
 
 const searchBar = document.querySelector('input[type="search"]');
 const form = document.querySelector('form');
+const loader = document.querySelector('.loader');
+const error = document.querySelector('.error-msg');
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
+    error.style.display = 'none';
+    loader.style.display = 'none';
     if(searchBar.value){
-        const formattedName = formatCityName(searchBar.value);
-        const url = api.getBasicCallURL(formattedName);
-        getForecastData(url).then((coreForecastData) =>{
-            console.log(coreForecastData);
-            DOM.displayInfo(coreForecastData);
-        }).catch((err)=>{
-            console.log(err);
-        })
-        
-    }else {
-        //error handling
+            getAndDisplay(searchBar.value);
     }
 })
 
 
 async function getForecastData(basicUrl){
+
     const coordinates = await api.getBasicData(basicUrl);
     const fullForecastUrl = api.getAdvancedCallURL(coordinates.lat, coordinates.lon, 'metric');
     const fullForecast = await api.getFullForecastData(fullForecastUrl);
@@ -34,13 +29,17 @@ async function getForecastData(basicUrl){
     return coreForecastData;
 }
 
-// const url = api.getBasicCallURL(formatCityName(" Port-Of-Spain , Trinidad "));
+function getAndDisplay(cityName){
+    const formattedName = formatCityName(cityName);
+    const url = api.getBasicCallURL(formattedName);
+    loader.style.display = 'block';
+    getForecastData(url).then((coreForecastData) =>{
+        DOM.displayInfo(coreForecastData);
+        loader.style.display = 'none';
+    }).catch((err) =>{
+        error.style.display = 'block';
+    })
+}
 
-// api.getBasicData(url).then((coordinates)=>{
-//     const forecastUrl = api.getAdvancedCallURL(coordinates.lat, coordinates.lon, 'metric');
-//     api.getFullForecastData(forecastUrl).then((data)=>{
-//         console.log(data.list[0]);
-//         extractCoreData(coordinates.name, data);
-//     })
-// })
+getAndDisplay('Port of Spain');
 
